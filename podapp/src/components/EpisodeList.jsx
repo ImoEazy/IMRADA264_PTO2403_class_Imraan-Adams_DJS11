@@ -8,7 +8,10 @@ const EpisodeList = ({ episodes }) => {
           <h4 className="text-lg font-bold">{episode.title}</h4>
           <p className="text-sm text-gray-600">{episode.description}</p>
           <p className="text-sm text-gray-500">Duration: {episode.duration}</p>
-          <a href={episode.audio_url} target="_blank" rel="noopener noreferrer" className="text-blue-500 mt-2 block">Listen</a>
+          <audio controls>
+            <source src="https://www.example.com/audio/placeholder.mp3" type="audio/mp3" />
+            Your browser does not support the audio element.
+          </audio>
         </div>
       ))}
     </div>
