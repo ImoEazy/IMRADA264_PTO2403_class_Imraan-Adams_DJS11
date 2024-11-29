@@ -1,28 +1,28 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 const AudioPlayer = ({ episode }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
 
-  const togglePlayPause = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
-    setIsPlaying(!isPlaying);
+  const togglePlay = () => {
+    setPlaying((prev) => !prev);
   };
 
   return (
-    <div className="my-6">
-      <h3 className="text-xl font-semibold">{episode.name}</h3>
-      <audio ref={audioRef} src={episode.audioUrl} controls />
-      <button
-        onClick={togglePlayPause}
-        className="mt-2 p-2 bg-blue-600 text-white rounded-md"
-      >
-        {isPlaying ? 'Pause' : 'Play'}
-      </button>
+    <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4">
+      <div className="flex items-center">
+        <button onClick={togglePlay}>
+          {playing ? 'Pause' : 'Play'}
+        </button>
+        <div className="ml-4">
+          <strong>{episode?.title}</strong>
+          <p>{episode?.duration}</p>
+        </div>
+        <audio
+          controls
+          src="https://www.example.com/audio/placeholder.mp3"
+          className="ml-auto"
+        />
+      </div>
     </div>
   );
 };
