@@ -1,17 +1,38 @@
 import React from 'react';
 
-const EpisodeList = ({ episodes }) => {
+const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, favorites }) => {
+  const isFavorite = (episodeId) => {
+    return favorites.some((favorite) => favorite.id === episodeId);
+  };
+
+  const handleFavoriteToggle = (episode) => {
+    if (isFavorite(episode.id)) {
+      // If already favorite, remove it
+      // This logic needs to be in the FavoriteContext, which we will handle
+    } else {
+      addFavorite(episode);
+    }
+  };
+
   return (
-    <div className="mt-4">
+    <div>
       {episodes.map((episode) => (
         <div key={episode.id} className="p-4 border rounded-md shadow-md mt-2">
           <h4 className="text-lg font-bold">{episode.title}</h4>
           <p className="text-sm text-gray-600">{episode.description}</p>
           <p className="text-sm text-gray-500">Duration: {episode.duration}</p>
-          <audio controls>
-            <source src="https://www.example.com/audio/placeholder.mp3" type="audio/mp3" />
-            Your browser does not support the audio element.
-          </audio>
+          <button
+            onClick={() => onEpisodeSelect(episode)}
+            className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
+          >
+            Play Episode
+          </button>
+          <button
+            onClick={() => handleFavoriteToggle(episode)}
+            className={`ml-4 ${isFavorite(episode.id) ? 'text-red-500' : 'text-gray-500'}`}
+          >
+            {isFavorite(episode.id) ? 'Remove from Favorites' : 'Add to Favorites'}
+          </button>
         </div>
       ))}
     </div>
