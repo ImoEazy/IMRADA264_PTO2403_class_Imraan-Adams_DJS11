@@ -10,6 +10,7 @@ import LoadingState from './components/LoadingState';
 function App() {
   const [genreFilter, setGenreFilter] = useState(null);
   const [selectedEpisode, setSelectedEpisode] = useState(null); // To manage currently playing episode
+  const [loading] = useState(false); // Manage loading state
 
   return (
     <FavoriteProvider>
@@ -28,14 +29,15 @@ function App() {
           </nav>
 
           <div className="container mx-auto p-4">
+            {/* Routes for different pages */}
             <Routes>
-              {/* Default Home Route */}
+              {/* Default Home Route - Show List */}
               <Route
                 path="/"
                 element={<ShowList genreFilter={genreFilter} setGenreFilter={setGenreFilter} />}
               />
 
-              {/* Route for a specific show */}
+              {/* Show Details Route */}
               <Route
                 path="/show/:id"
                 element={<ShowDetails setSelectedEpisode={setSelectedEpisode} />}
@@ -44,6 +46,10 @@ function App() {
               {/* Favorites Page Route */}
               <Route path="/favorites" element={<FavoritesPage />} />
             </Routes>
+
+            {/* Show loading state when fetching data */}
+            {loading && <LoadingState />}
+
           </div>
 
           {/* Audio Player is always visible */}
