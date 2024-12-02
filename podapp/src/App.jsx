@@ -1,34 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ShowList from './components/ShowList';
 import ShowDetails from './components/ShowDetails';
+import FavoritesPage from './pages/FavoritesPage';
+import { FavoriteProvider } from './context/FavoriteContext';
+import AudioPlayer from './components/AudioPlayer';
+import LoadingState from './components/LoadingState';
 
 function App() {
-  const [shows, setShows] = useState([]);
-  const [selectedShow, setSelectedShow] = useState(null);
-
-  useEffect(() => {
-    // Fetch list of shows (PREVIEW)
-    axios.get('https://podcast-api.netlify.app')
-      .then((response) => {
-        setShows(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching shows:", error);
-      });
-  }, []);
+  
+  const [genreFilter, setGenreFilter] = useState(null);
+  const [selectedEpisode, setSelectedEpisode] = useState(null); // To manage currently playing episode
 
   return (
-    <div className="App">
-      <h1 className="text-4xl font-bold text-center py-4">Podcast App</h1>
-      <div className="container mx-auto">
-        {!selectedShow ? (
-          <ShowList shows={shows} setSelectedShow={setSelectedShow} />
-        ) : (
-          <ShowDetails show={selectedShow} setSelectedShow={setSelectedShow} />
-        )}
-      </div>
-    </div>
+    <FavoriteProvider>
+      <Router>
+        <div className="App">
+          {/* Global Navigation Bar */}
+          <nav className="p-4 bg-gray-800 text-white">
+            <ul className="flex space-x-4">
+              <li>
+                <a href="/" className="text-xl">HOME</a>
+              </li>
+              <li>
+                <a href="/favorites" className="text-xl">FAVORITES</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="container mx-auto p-4">
+            <Routes>
+              {/* Default Home Route */}
+              <Route
+                path="/"
+                element={<ShowList genreFilter={genreFilter} setGenreFilter={setGenreFilter} />}
+              />
+
+              {/* Route for a specific show */}
+              <Route
+                path="/show/:id"
+                element={<ShowDetails setSelectedEpisode={setSelectedEpisode} />}
+              />
+
+              {/* Favorites Page Route */}
+              <Route path="/favorites" element={<FavoritesPage />} />
+            </Routes>
+          </div>
+
+          {/* Audio Player is always visible */}
+          {selectedEpisode && <AudioPlayer episode={selectedEpisode} />}
+        </div>
+      </Router>
+    </FavoriteProvider>
   );
 }
 

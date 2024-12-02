@@ -1,17 +1,57 @@
-import React from 'react';
-import GenreCard from './GenreCard';
+import React, { useState, useEffect } from 'react';
+import usePodcast from '../hooks/usePodcast';
+import genreMapping from '../utils/genreMapping';
+import ShowCard from './ShowCard';
 
-const ShowList = ({ shows, setSelectedShow }) => {
+const ShowList = ({ genreFilter, setGenreFilter }) => {
+  const [filteredShows, setFilteredShows] = useState([]);
+  
+  // Fetch all shows (previews)
+  const { data, loading, error } = usePodcast('https://podcast-api.netlify.app'); 
+
+  // Filter shows based on selected genre
+  useEffect(() => {
+    if (data) {
+      if (genreFilter) {
+        // Filter the data by genre
+        const filtered = data.filter((show) =>
+          show.genres.includes(genreFilter)
+        );
+        setFilteredShows(filtered);
+      } else {
+        setFilteredShows(data);
+      }
+    }
+  }, [data, genreFilter]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {shows.map((show) => (
-        <div key={show.id} className="border rounded-lg p-4 hover:shadow-lg cursor-pointer" onClick={() => setSelectedShow(show)}>
-          <img src={show.image} alt={show.title} className="w-full h-48 object-cover rounded-md" />
-          <h2 className="text-xl font-semibold mt-2">{show.title}</h2>
-          <p className="text-sm text-gray-500">{show.description}</p>
-          <GenreCard genreId={show.genreId} />
-        </div>
-      ))}
+    <div>
+      <h1>Available Podcasts</h1>
+
+      {/* Genre Filter */}
+      <div>
+        <select
+          onChange={(e) => setGenreFilter(Number(e.target.value))}
+          value={genreFilter || ''}
+        >
+          <option value="">All Genres</option>
+          {Object.entries(genreMapping).map(([id, genre]) => (
+            <option key={id} value={id}>
+              {genre}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Display the list of shows */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        {filteredShows.map((show) => (
+          <ShowCard key={show.id} show={show} />
+        ))}
+      </div>
     </div>
   );
 };
