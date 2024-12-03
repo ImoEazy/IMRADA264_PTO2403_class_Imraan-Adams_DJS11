@@ -1,19 +1,21 @@
 import React from 'react';
 
 const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, favorites }) => {
-  const isFavorite = (episodeId) => {
+  const isFavorite = (episodeId) => {//This function checks if a given episode is in the favorites list by comparing its id with those in the favorites array.
     return favorites.some((favorite) => favorite.id === episodeId);
   };
 
+  //This function toggles the "favorite" status of an episode
+ //If the episode is already a favorite, the removal logic (not implemented here) would handle it.
+ //If the episode is not a favorite, it calls addFavorite to add the episode to the favorites list.
   const handleFavoriteToggle = (episode) => {
     if (isFavorite(episode.id)) {
-      // If already favorite, remove it
-      // This logic needs to be in the FavoriteContext, which we will handle
+
     } else {
       addFavorite(episode);
     }
   };
-
+  //The EpisodeList component maps over the episodes array and renders a div for each episode with its details and buttons for actions.
   return (
     <div>
       {episodes.map((episode) => (
@@ -28,7 +30,7 @@ const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, favorites }) => {
             Play Episode
           </button>
           <button
-            onClick={() => handleFavoriteToggle(episode)}
+            onClick={() => handleFavoriteToggle(episode)}//Calls the onEpisodeSelect function with the current episode when clicked.
             className={`ml-4 ${isFavorite(episode.id) ? 'text-red-500' : 'text-gray-500'}`}
           >
             {isFavorite(episode.id) ? 'Remove from Favorites' : 'Add to Favorites'}
