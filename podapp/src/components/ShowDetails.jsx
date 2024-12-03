@@ -1,4 +1,4 @@
-///////////show and seaon preview page///////////////////////
+///////////SHOW AND SEASONS PAGE///////////////////////
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingState from './LoadingState';

@@ -15,7 +15,8 @@ const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, favorites }) => {
       addFavorite(episode);
     }
   };
-  //The EpisodeList component maps over the episodes array and renders a div for each episode with its details and buttons for actions.
+  //The EpisodeList component maps over the episodes array and renders a div for each episode 
+  //with its details and buttons for actions.
   return (
     <div>
       {episodes.map((episode) => (
@@ -30,7 +31,8 @@ const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, favorites }) => {
             Play Episode
           </button>
           <button
-            onClick={() => handleFavoriteToggle(episode)}//Calls the onEpisodeSelect function with the current episode when clicked.
+            ////Calls the onEpisodeSelect function with the current episode when clicked.
+            onClick={() => handleFavoriteToggle(episode)}
             className={`ml-4 ${isFavorite(episode.id) ? 'text-red-500' : 'text-gray-500'}`}
           >
             {isFavorite(episode.id) ? 'Remove from Favorites' : 'Add to Favorites'}
