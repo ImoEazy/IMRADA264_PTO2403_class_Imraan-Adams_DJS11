@@ -5,7 +5,6 @@ import ShowDetails from './components/ShowDetails';
 import FavoritesPage from './pages/FavoritesPage';
 import { FavoriteProvider } from './context/FavoriteContext';
 import AudioPlayer from './components/AudioPlayer';
-import LoadingState from './components/LoadingState';
 
 function App() {
   

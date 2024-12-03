@@ -1,3 +1,4 @@
+///////////show and seaon preview page///////////////////////
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingState from './LoadingState';
@@ -46,13 +47,13 @@ const ShowDetails = ({ setSelectedEpisode }) => {
       {/* Show Details Header */}
       <div className="mb-8">
         <img
-          src={showData.thumbnail}
+          src={showData.image}
           alt={showData.title}
-          className="w-full h-56 object-cover rounded-md"
+          className="w-60 h-50 object-cover rounded-md"
         />
         <h2 className="text-3xl font-bold mt-4">{showData.title}</h2>
         <p className="text-gray-600 mt-2">
-          Last updated: {new Date(showData.last_updated).toLocaleDateString()}
+          Last updated: {new Date(showData.updated).toLocaleDateString()} {/*converts to string new (value: number | string | Date)  */}
         </p>
         <p className="text-sm text-gray-500 mt-2">Genres: {showData.genres.join(', ')}</p>
       </div>

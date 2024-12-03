@@ -20,13 +20,13 @@ const usePodcast = (url) => {
         setData(result); // Set the data to the state
         setLoading(false); // Set loading to false after data is fetched
       } catch (err) {
-        setError(err.message); // If error occurs, update error state
+        setError(err.message); // If error happens, update error state
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [url]); // Re-run the effect whenever the URL changes
+  }, [url]); // Re-run effect whenever the URL changes
 
   return { data, loading, error };
 };
