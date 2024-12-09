@@ -22,7 +22,7 @@ function App() {
                 <a href="/" className="text-xl">HOME</a>
               </li>
               <li>
-                <a href="/favorites" className="text-xl">FAVORITES</a>
+                <a href="/favorites" className="text-xl">FAVOURITES</a>
               </li>
             </ul>
           </nav>

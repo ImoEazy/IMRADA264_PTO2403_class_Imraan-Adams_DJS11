@@ -1,3 +1,4 @@
+////SEASON LIST CARDS///////
 import React, { useState } from 'react';
 
 const SeasonSelector = ({ seasons, onSeasonChange }) => {
@@ -14,16 +15,23 @@ const SeasonSelector = ({ seasons, onSeasonChange }) => {
 
   return (
     <div className="flex space-x-4 mt-4">
-      {seasons.map((season) => (
+      {seasons.map((season, index) => (
         <button
           key={season.id}
           onClick={() => handleSeasonChange(season.id)}
-          className={`px-4 py-2 rounded-lg transition-colors ${
-            selectedSeason === season.id ? 'bg-blue-500 text-white' : 'bg-gray-200'
+          className={`flex flex-col items-center px-4 py-1 rounded-lg transition-colors ${
+            selectedSeason === season.id ? 'bg-indigo-600 text-white' : 'bg-gray-200'
           }`}
           aria-pressed={selectedSeason === season.id}
         >
-          {season.title} ({season.episodes.length} episodes)
+          <img
+            src={season.image}
+            alt={`${season.title} thumbnail`}
+            className="w-20 h-20 object-cover rounded-lg mb-2"
+          />
+          <span className="font-bold">Season {index + 1}</span>
+          <span>{season.title}</span>
+          <span className="text-sm text-white-600">{season.episodes.length} episodes</span>
         </button>
       ))}
     </div>

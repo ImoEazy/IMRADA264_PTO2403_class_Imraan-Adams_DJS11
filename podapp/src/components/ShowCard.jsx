@@ -26,11 +26,11 @@ const ShowCard = ({ show }) => {
       <h3 className="text-xl font-semibold text-gray-800">{name}</h3>
 
       {/* Genres */}
-      <p className="text-sm text-gray-600 mt-1">{genreNames}</p>
+      <p className="text-sm text-gray-800 mt-1">{show.title}</p>
 
       {/* Seasons and Last Updated */}
-      <div className="mt-2 flex justify-between text-gray-500">
-        <p>{seasons.length} Seasons</p>
+      <div className="mt-2 flex justify-between text-gray-800">
+        <p>{seasons} Seasons</p>
         <p>Updated: {formattedDate}</p>
       </div>
 
@@ -38,9 +38,9 @@ const ShowCard = ({ show }) => {
       <div className="mt-4">
         <Link
           to={`/show/${id}`}
-          className="text-blue-600 hover:text-blue-800"
+          className="text-bd-gray-800 hover:text-blue-600"
         >
-          View Details
+          VIEW SHOW
         </Link>
       </div>
     </div>
