@@ -1,29 +1,25 @@
 import React from 'react';
 
-const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, favorites }) => {
-  const isFavorite = (episodeId) => {//This function checks if a given episode is in the favorites list by comparing its id with those in the favorites array.
+const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, removeFavorite, favorites }) => {
+  const isFavorite = (episodeId) => {
     return favorites.some((favorite) => favorite.id === episodeId);
   };
 
-  //This function toggles the "favorite" status of an episode
- //If the episode is already a favorite, the removal logic (not implemented here) would handle it.
- //If the episode is not a favorite, it calls addFavorite to add the episode to the favorites list.
   const handleFavoriteToggle = (episode) => {
     if (isFavorite(episode.id)) {
-
+      removeFavorite(episode.id); // Remove if already a favorite
     } else {
-      addFavorite(episode);
+      addFavorite(episode); // Add if not a favorite
     }
   };
-  //The EpisodeList component maps over the episodes array and renders a div for each episode 
-  //with its details and buttons for actions.
+
   return (
     <div>
       {episodes.map((episode) => (
         <div key={episode.id} className="p-4 border rounded-md shadow-md mt-2">
           <h4 className="text-lg font-bold">{episode.title}</h4>
           <p className="text-sm text-gray-600">{episode.description}</p>
-          <p className="text-sm text-gray-500">Duration: {episode.duration}</p>
+          <p className="text-sm text-gray-500">Duration: {episode.duration || 'N/A'}</p>
           <button
             onClick={() => onEpisodeSelect(episode)}
             className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
@@ -31,9 +27,10 @@ const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, favorites }) => {
             Play Episode
           </button>
           <button
-            ////Calls the onEpisodeSelect function with the current episode when clicked.
             onClick={() => handleFavoriteToggle(episode)}
-            className={`ml-4 ${isFavorite(episode.id) ? 'text-red-500' : 'text-gray-500'}`}
+            className={`ml-4 px-4 py-2 rounded mt-2 ${
+              isFavorite(episode.id) ? 'bg-red-500 text-white' : 'bg-gray-300 text-black'
+            }`}
           >
             {isFavorite(episode.id) ? 'Remove from Favorites' : 'Add to Favorites'}
           </button>
