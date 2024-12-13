@@ -1,4 +1,3 @@
-////SEASON LIST CARDS///////
 import React, { useState } from 'react';
 
 const SeasonSelector = ({ seasons, onSeasonChange }) => {

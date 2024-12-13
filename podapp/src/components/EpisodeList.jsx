@@ -1,15 +1,19 @@
 import React from 'react';
 
 const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, removeFavorite, favorites }) => {
-  const isFavorite = (episodeId) => {
-    return favorites.some((favorite) => favorite.id === episodeId);
+  // Check if an episode is in the favorites list by title and id
+  const isFavorite = (episode) => {
+    return favorites.some(
+      (favorite) => favorite.title === episode.title
+    );
   };
 
+  // Toggle the favorite status for a specific episode
   const handleFavoriteToggle = (episode) => {
-    if (isFavorite(episode.id)) {
-      removeFavorite(episode.id); // Remove if already a favorite
+    if (isFavorite(episode)) {
+      removeFavorite(episode.id); // Use the episode ID for removal
     } else {
-      addFavorite(episode); // Add if not a favorite
+      addFavorite(episode); // Add the full episode object to favorites
     }
   };
 
@@ -29,10 +33,10 @@ const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, removeFavorite, f
           <button
             onClick={() => handleFavoriteToggle(episode)}
             className={`ml-4 px-4 py-2 rounded mt-2 ${
-              isFavorite(episode.id) ? 'bg-red-500 text-white' : 'bg-gray-300 text-black'
+              isFavorite(episode) ? 'bg-red-500 text-white' : 'bg-gray-300 text-black'
             }`}
           >
-            {isFavorite(episode.id) ? 'Remove from Favorites' : 'Add to Favorites'}
+            {isFavorite(episode) ? 'Remove from Favorites' : 'Add to Favorites'}
           </button>
         </div>
       ))}

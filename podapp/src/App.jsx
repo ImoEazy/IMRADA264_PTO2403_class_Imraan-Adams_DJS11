@@ -42,7 +42,9 @@ function App() {
               />
 
               {/* Favorites Page Route */}
-              <Route path="/favorites" element={<FavoritesPage />} />
+              <Route 
+                path="/favorites" 
+                element={<FavoritesPage />} />
             </Routes>
           </div>
 
@@ -54,4 +56,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

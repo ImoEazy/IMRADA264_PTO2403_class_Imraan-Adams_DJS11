@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import genreMapping from '../utils/genreMapping';
 
 const ShowCard = ({ show }) => {
-  const { id, name, image, seasons, genres, updatedAt } = show;
+  const { id, name, image, seasons, genres, updated } = show;
 
   // Get the genre names from the genre IDs
   const genreNames = genres.map((genreId) => genreMapping[genreId]).join(', ');
 
   // Format the updatedAt date into a human-readable format
-  const formattedDate = new Date(updatedAt).toLocaleDateString();
+  const formattedDate = new Date(updated).toLocaleDateString();
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-lg">

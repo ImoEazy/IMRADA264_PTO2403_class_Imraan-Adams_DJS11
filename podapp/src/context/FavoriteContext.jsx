@@ -14,6 +14,8 @@ export const FavoriteProvider = ({ children }) => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
+  
+
   // Add an episode to favorites
   const addFavorite = (episode) => {
     setFavorites((prevFavorites) => {
@@ -24,12 +26,14 @@ export const FavoriteProvider = ({ children }) => {
     });
   };
 
+//eg
   // Remove an episode from favorites
   const removeFavorite = (episodeId) => {
     setFavorites((prevFavorites) =>
       prevFavorites.filter((episode) => episode.id !== episodeId)
     );
   };
+
 
   return (
     <FavoriteContext.Provider value={{ favorites, addFavorite, removeFavorite }}>

@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { FavoriteContext } from '../context/FavoriteContext';
 
+
 const FavoritesPage = () => {
   const { favorites, removeFavorite } = useContext(FavoriteContext);
+  
 
   return (
     <div>
