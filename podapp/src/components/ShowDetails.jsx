@@ -11,6 +11,7 @@ const ShowDetails = ({ setSelectedEpisode }) => {
   const [showData, setShowData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedSeason, setSelectedSeason] = useState(null); // Track the selected season
+  
   const { favorites, addFavorite, removeFavorite } = useContext(FavoriteContext);
 
   // Fetch show data by ID
