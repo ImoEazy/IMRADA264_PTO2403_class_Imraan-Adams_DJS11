@@ -11,7 +11,7 @@ const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, removeFavorite, f
   // Toggle the favorite status for a specific episode
   const handleFavoriteToggle = (episode) => {
     if (isFavorite(episode)) {
-      removeFavorite(episode.id); // Use the episode ID for removal
+      removeFavorite(episode.title); //changed id to title///////// // Use the episode ID for removal
     } else {
       addFavorite(episode); // Add the full episode object to favorites
     }
