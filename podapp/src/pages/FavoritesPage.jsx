@@ -8,7 +8,7 @@ const FavoritesPage = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">FAVORITES</h1>
+      <h1 className="text-2xl font-bold">FAVOURITES</h1> {/* changed to favourites */}
       <div>
         {favorites.length === 0 ? (
           <p>No favorites added yet</p>
