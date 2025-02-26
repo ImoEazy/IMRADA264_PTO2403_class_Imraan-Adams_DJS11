@@ -1,3 +1,4 @@
+///////check code for api example////
 import React from 'react';
 
 const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, removeFavorite, favorites }) => {

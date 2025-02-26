@@ -1,5 +1,6 @@
+/////////////check code for api example//////////////////////////////////
 import React, { createContext, useState, useEffect } from 'react';
-
+////////check code for new code and apu example////
 // Create context for favorites
 export const FavoriteContext = createContext();
 
@@ -41,3 +42,4 @@ export const FavoriteProvider = ({ children }) => {
     </FavoriteContext.Provider>
   );
 };
+
