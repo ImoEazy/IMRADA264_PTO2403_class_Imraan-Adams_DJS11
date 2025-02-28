@@ -1,40 +1,23 @@
-/////////////check code for api example//////////////////////////////////
-import React, { createContext, useState, useEffect } from 'react';
-////////check code for new code and apu example////
-// Create context for favorites
-export const FavoriteContext = createContext();
+// src/context/FavoriteContext.jsx
+
+import React, { createContext, useContext, useState } from 'react';
+
+const FavoriteContext = createContext();
+
+export const useFavorites = () => {
+  return useContext(FavoriteContext);
+};
 
 export const FavoriteProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    return storedFavorites;
-  });
+  const [favorites, setFavorites] = useState([]);
 
-  // Update localStorage when favorites change
-  useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
-  }, [favorites]);
-
-  
-
-  // Add an episode to favorites
   const addFavorite = (episode) => {
-    setFavorites((prevFavorites) => {
-      if (!prevFavorites.some((fav) => fav.id === episode.id)) {
-        return [...prevFavorites, episode];
-      }
-      return prevFavorites;
-    });
+    setFavorites((prevFavorites) => [...prevFavorites, episode]);
   };
 
-//eg
-  // Remove an episode from favorites
-  const removeFavorite = (episodeId) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.filter((episode) => episode.id !== episodeId)
-    );
+  const removeFavorite = (episode) => {
+    setFavorites((prevFavorites) => prevFavorites.filter((fav) => fav.id !== episode.id));
   };
-
 
   return (
     <FavoriteContext.Provider value={{ favorites, addFavorite, removeFavorite }}>
@@ -42,4 +25,3 @@ export const FavoriteProvider = ({ children }) => {
     </FavoriteContext.Provider>
   );
 };
-
