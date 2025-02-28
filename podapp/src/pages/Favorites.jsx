@@ -9,7 +9,7 @@ const Favorites = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold">Favorite Episodes</h1>
+      <h1 className="text-3xl font-bold">Favuorite Episodes</h1>
       <div>
         {favorites.map((episode) => (
           <div key={episode.id} className="flex justify-between">
