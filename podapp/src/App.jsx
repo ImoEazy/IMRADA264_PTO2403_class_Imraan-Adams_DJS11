@@ -1,29 +1,59 @@
-// src/App.jsx
-
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import ShowList from './components/ShowList';
+import ShowDetails from './components/ShowDetails';
+import FavoritesPage from './pages/FavoritesPage';
 import { FavoriteProvider } from './context/FavoriteContext';
-import Navbar from './components/Navbar/Navbar';
-import HomePage from './pages/HomePage';
-import ShowPage from './pages/ShowPage';
-import Favorites from './pages/Favorites';
-import GenrePage from './pages/GenrePage';
+import AudioPlayer from './components/AudioPlayer';
 
-const App = () => {
+function App() {
+  
+  const [genreFilter, setGenreFilter] = useState(null);
+  const [selectedEpisode, setSelectedEpisode] = useState(null); // To manage currently playing episode
+
   return (
     <FavoriteProvider>
       <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/show/:id" element={<ShowPage />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/genre/:id" element={<GenrePage />} />
-        </Routes>
+        <div className="App">
+          {/* Global Navigation Bar */}
+          <nav className="p-4 bg-gray-800 text-white">
+            <ul className="flex space-x-4">
+              <li>
+                <a href="/" className="text-xl">HOME</a>
+              </li>
+              <li>
+                <a href="/favorites" className="text-xl">FAVOURITES</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="container mx-auto p-4">
+            <Routes>
+              {/* Default Home Route */}
+              <Route
+                path="/"
+                element={<ShowList genreFilter={genreFilter} setGenreFilter={setGenreFilter} />}
+              />
+
+              {/* Route for a specific show */}
+              <Route
+                path="/show/:id"
+                element={<ShowDetails setSelectedEpisode={setSelectedEpisode} />}
+              />
+
+              {/* Favorites Page Route */}
+              <Route 
+                path="/favorites" 
+                element={<FavoritesPage />} />
+            </Routes>
+          </div>
+
+          {/* Audio Player is always visible */}
+          {selectedEpisode && <AudioPlayer episode={selectedEpisode} />}
+        </div>
       </Router>
     </FavoriteProvider>
   );
-};
+}
 
-export default App;
+export default App; 
