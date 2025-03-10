@@ -1,5 +1,3 @@
-// src/pages/ShowPage.jsx
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import EpisodeCard from '../components/EpisodeCard/EpisodeCard';
@@ -25,8 +23,16 @@ const ShowPage = () => {
       <p>{show.description}</p>
       <div className="mt-4">
         {show.seasons.map((season) => (
-          <div key={season.id}>
+          <div key={season.id} className="mb-6">
             <h2 className="text-2xl font-semibold">{season.title}</h2>
+            {/* Render the season image with smaller size */}
+            {season.image && (
+              <img
+                src={season.image}
+                alt={season.title}
+                className="mt-2 mb-4 w-32 h-auto rounded-lg" // Smaller image size (width: 8rem)
+              />
+            )}
             {season.episodes.map((episode) => (
               <EpisodeCard key={episode.id} episode={episode} onFavorite={addFavorite} />
             ))}
