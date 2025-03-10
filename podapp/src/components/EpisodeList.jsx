@@ -2,17 +2,15 @@
 import React from 'react';
 
 const EpisodeList = ({ episodes, onEpisodeSelect, addFavorite, removeFavorite, favorites }) => {
-  // Check if an episode is in the favorites list by title and id
+  // Check if an episode is in the favorites list by episode id
   const isFavorite = (episode) => {
-    return favorites.some(
-      (favorite) => favorite.title === episode.title
-    );
+    return favorites.some((favorite) => favorite.id === episode.id);
   };
 
   // Toggle the favorite status for a specific episode
   const handleFavoriteToggle = (episode) => {
     if (isFavorite(episode)) {
-      removeFavorite(episode.id); //changed id to title///////// // Use the episode ID for removal
+      removeFavorite(episode.id); // Use the episode ID for removal
     } else {
       addFavorite(episode); // Add the full episode object to favorites
     }
