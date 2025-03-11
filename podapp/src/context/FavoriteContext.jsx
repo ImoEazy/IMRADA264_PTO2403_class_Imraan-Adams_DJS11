@@ -16,8 +16,9 @@ export const FavoriteProvider = ({ children }) => {
 
   // Add an episode to favorites
   const addFavorite = (episode) => {
+    console.log(episode.title)
     setFavorites((prevFavorites) => {
-      if (!prevFavorites.some((fav) => fav.id === episode.id)) {
+      if (!prevFavorites.some((fav) => fav.title === episode.title)) {
         return [...prevFavorites, episode];
       }
       return prevFavorites;
@@ -25,9 +26,9 @@ export const FavoriteProvider = ({ children }) => {
   };
 
   // Remove an episode from favorites
-  const removeFavorite = (episodeId) => {
+  const removeFavorite = (episode) => {
     setFavorites((prevFavorites) =>
-      prevFavorites.filter((episode) => episode.id !== episodeId)
+      prevFavorites.filter((current) => current.title !== episode.title)
     );
   };
 
