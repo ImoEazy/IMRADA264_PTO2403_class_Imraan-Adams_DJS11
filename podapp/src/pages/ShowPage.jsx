@@ -34,7 +34,7 @@ const ShowPage = () => {
               />
             )}
             {season.episodes.map((episode) => (
-              <EpisodeCard key={episode.id} episode={episode} onFavorite={addFavorite} />
+              <EpisodeCard key={episode.title} episode={episode} onFavorite={addFavorite} />
             ))}
           </div>
         ))}

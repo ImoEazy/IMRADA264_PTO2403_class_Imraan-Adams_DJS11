@@ -7,7 +7,7 @@ const ShowList = ({ genreFilter, setGenreFilter }) => {
   const [filteredShows, setFilteredShows] = useState([]);
   const [searchQuery, setSearchQuery] = useState(''); // State for the search input
   const [sortOrder, setSortOrder] = useState('asc'); // 'asc' for A-Z, 'desc' for Z-A
-  const { data, loading, error } = usePodcast('https://podcast-api.netlify.app');
+  const { data, loading, error } = usePodcast('https://podcast-api.netlify.app/id/${id}');
 
   // Function to sort shows
   const sortShows = (shows) => {
